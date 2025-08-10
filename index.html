@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets\images\Capturar.PNG">
+
+
+  <title>NoLimitar</title>
+  <style>
+    .video-section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .video-background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .overlay-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -40%);
+      }
+
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    .coming-soon-gif {
+      width: 800px;
+      max-width: 120vw;
+      height: auto;
+    }
+
+    .planos-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      /* Permite quebrar linha se não couber */
+      gap: 20px;
+      /* Espaço entre os cards */
+      padding: 10px;
+
+    }
+
+    .plano-item {
+      flex: 1 1 200px;
+      /* Cresce e encolhe com no mínimo 200px */
+      max-width: 250px;
+      padding: 10px;
+      text-align: center;
+      background-color: #0c1620;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .plano-item:hover {
+      transform: scale(1.05);
+    }
+
+    .plano-item h4 {
+      font-size: 1.6em;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .plano-item em {
+      font-size: 1.2em;
+      color: #007bff;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .plano-item p {
+      font-size: 1em;
+      color: #555;
+      margin-bottom: 15px;
+    }
+
+    .plano-item ul {
+      list-style-type: none;
+      padding: 0;
+      margin-bottom: 15px;
+    }
+
+    .plano-item ul li {
+      font-size: 0.9em;
+      color: #555;
+      margin-bottom: 8px;
+    }
+
+    .botao-plano a {
+      background-color: #007bff;
+      color: #fff;
+      padding: 12px 25px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: bold;
+      display: inline-block;
+      transition: background-color 0.3s;
+    }
+
+    .botao-plano a:hover {
+      background-color: #0056b3;
+    }
+
+    .plano-destaque {
+      border: 3px solid #ff9800;
+      background-color: #fff3e0;
+      box-shadow: 0 8px 16px rgba(255, 152, 0, 0.2);
+    }
+
+    .plano-destaque h4 {
+      color: #ff9800;
+    }
+
+    .plano-destaque .botao-plano a {
+      background-color: #ff9800;
+    }
+
+    .plano-destaque .botao-plano a:hover {
+      background-color: #f57c00;
+    }
+
+    /* animação moderna de entrada pela esquerda */
+    @keyframes slideInLeft {
+      0% {
+        transform: translateX(-100px);
+        opacity: 0;
+      }
+
+      100% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .slide-in-left {
+      animation: slideInLeft 3s ease-out 0.5s;
+    }
+
+    .plano-card {
+      max-width: 300px;
+      width: 100%;
+      padding: 40px 30px 32px;
+      background-color: #0a0f1a;
+      /* bg-gray-900 */
+      border-radius: 24px;
+      font-family: 'Segoe UI', sans-serif;
+      box-sizing: border-box;
+      color: #fff;
+      margin: 20px auto;
+
+    }
+
+    .plano-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .plano-header h5 {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .preco {
+      display: block;
+      font-size: 40px;
+      font-weight: bold;
+      margin-bottom: 12px;
+      color: #fff;
+    }
+
+    .descricao {
+      display: block;
+      font-size: 15px;
+      color: #d1d5db;
+      /* gray-300 */
+      margin-bottom: 24px;
+    }
+
+    .btn-comecar {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      background-color: #facc15;
+      /* yellow-600 */
+      color: #f9fafb;
+      padding: 14px 20px;
+      font-weight: 600;
+      border-radius: 9999px;
+      text-decoration: none;
+      overflow: hidden;
+      transition: color 0.2s ease-in-out;
+    }
+
+    .btn-comecar .overlay {
+      position: absolute;
+      top: 0;
+      right: 100%;
+      width: 100%;
+      height: 100%;
+      background-color: #fff;
+      transform: translateX(0);
+      transition: transform 0.5s ease, scale 0.5s ease;
+      z-index: 0;
+    }
+
+    .btn-comecar:hover {
+      color: #1f2937;
+    }
+
+    .btn-comecar:hover .overlay {
+      transform: translateX(100%) scale(1.02);
+    }
+
+    .btn-comecar .label {
+      position: relative;
+      z-index: 1;
+    }
+
+    .plano-beneficios {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .plano-beneficios li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+      font-size: 15px;
+    }
+
+    .plano-beneficios li::before {
+      content: "✔";
+      margin-right: 10px;
+      color: white;
+      font-size: 20px;
+    }
+
+    .plano-beneficios .inativo {
+      color: #6b7280;
+      /* gray-500 */
+      text-decoration: line-through;
+    }
+
+    .plano-beneficios .inativo::before {
+      color: #6b7280;
+    }
+
+    .preco-parcelado {
+      font-size: 2em;
+      /* Grande destaque */
+      font-weight: bold;
+      color: #e63946;
+      /* Vermelho chamativo */
+    }
+
+    .preco-total {
+      font-size: 1em;
+      /* Menor destaque */
+      color: #dddddd;
+      /* Cor mais neutra */
+    }
+  </style>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+
+  <!-- Additional CSS Files -->
+  <link rel="stylesheet" href="assets/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/css/templatemo-onix-digital.css">
+  <link rel="stylesheet" href="assets/css/animated.css">
+  <link rel="stylesheet" href="assets/css/owl.css">
+
+</head>
+
+<body>
+
+  <!-- ***** Preloader Start tira so o T ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <nav class="main-nav">
+            <a href="index.html" class="logo">
+              <img src="assets\images\nolimitar.png" alt="NoLimitar Logo" style="width: 200px; height: auto;">
+            </a>
+            <ul class="nav">
+              <li class="scroll-to-section"><a href="#top" class="active">Inicio</a></li>
+              <li class="scroll-to-section"><a href="#about">Sobre</a></li>
+              <li class="scroll-to-section"><a href="#services">Cursos</a></li>
+              <li class="scroll-to-section">
+                <div class="main-red-button-hover"><a href="#contact">Fale com nossa equipe</a></div>
+              </li>
+            </ul>
+            <a class='menu-trigger'>
+              <span>Menu</span>
+            </a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <div class="main-banner" id="top">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="row">
+            <div class="col-lg-6 align-self-center">
+              <div class="owl-carousel owl-banner">
+                <div class="item header-text" style="color: white;"">
+                  <h6>Bem-Vindo a NoLimitar</h6>
+                  <h2>Do <em>Caos Financeiro</em> ao <span>Primeiro Investimento</span></h2>
+
+                  <p>Uma escola 100% online. Levamos educação financeira aonde você estiver.</p>
+                  <div class=" down-buttons">
+
+                </div>
+              </div>
+              <div class="item header-text">
+                <h6 style="font-size: 1,5em;">Aulas Online</h6>
+                <h2 style="font-size: 42px;">Melhores <em>Aulas e Conteúdos</em> Sobre <span>Educação Financeira</span>
+                </h2>
+                <p style="font-size: 1em;">Mais do que conveniência, nossa estrutura permite uma jornada de aprendizado
+                  personalizada, flexível e transformadora.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="about" class="about-us section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 align-self-center">
+          <div class="left-image">
+            <img src="assets/images/about-left-image.png" alt="Two Girls working together">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="section-heading">
+            <h2 style="text-align: center;">
+              Uma Jornada de <em>Aprendizado</em>, <em>Personalizada,</em> <span>Flexível</span> e Transformadora
+            </h2>
+
+
+            <p style="font-size: 1.20rem; line-height: 1.8;">
+              A <strong style="color:#007acc;">NoLimitar</strong> nasceu com um propósito claro: tornar a
+              <strong style="color:#e53935;">educação financeira</strong> acessível e prática para quem
+              nunca teve orientação sobre o dinheiro. Para pessoas comuns, com
+              <strong style="color:#007acc;">metodologia direta</strong>, sem linguagem técnica desnecessária. <br>
+              Vivemos em um tempo em que a maioria das pessoas se sentem
+              perdidas financeiramente por falta de um conhecimento que deveria
+              ser básico:
+              <strong style="color:#007acc;">Como organizar</strong>, <strong style="color:#e53935;">planejar</strong> e
+              <strong style="color:#007acc;">investir</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="about" class="about-us section">
+    <div class="container">
+      <div class="row">
+        <!-- Coluna do texto agora vem primeiro -->
+        <div class="col-lg-6">
+          <div class="instructor-info slide-in-left hidden">
+            <h3 style="font-size: 25px;">Sobre o nosso Professor: Sylvain Chenuc</h3>
+            <p><strong>Com formação na França, Reino Unido e Instituto EFINC (Brasil)</strong></p>
+
+            <p><strong>Experiência:</strong></p>
+            <ul>
+              <li>Consultor em Risco de Mercado por 5 anos em Londres, atuando em análise e gestão de riscos
+                financeiros.</li>
+              <li>Empresário por 17 anos nos setores de Educação e Construção Civil, conduzindo a administração geral
+                dos negócios.</li>
+              <li>Mentor e Educador Financeiro há 5 anos, auxiliando pessoas físicas e empreendedores em
+                endividamento, organização financeira e investimentos.</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Coluna da imagem agora vem depois -->
+        <div class="col-lg-6 align-self-center">
+          <div class="left-image">
+            <img src="assets/images/Foto2.png" alt="prog" class="foto-moderna">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+  <div id="pricing" class="pricing-tables">
+    <div class="tables-left-dec">
+      <img src="assets/images/tables-left-dec.png" alt="">
+    </div>
+    <div class="tables-right-dec">
+      <img src="assets/images/tables-right-dec.png" alt="">
+    </div>
+    <div class="container" id="services">
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+          <div class="section-heading">
+            <h2>Nossos Planos
+
+            </h2>
+
+          </div>
+        </div>
+      </div>
+      <div class="row">
+      </div>
+    </div>
+
+    <div class="planos-container" style="margin-top: -50px;">
+      <div class="plano-card" style="background-color: #0a0f1a ;">
+        <div class="plano-header" style="background-color: #0a0f1a ;">
+          <h5>Terapia Financeira</h5>
+          <div class="preco-container">
+            <div class="preco-parcelado">12x de R$ 59,90</div>
+            <div class="preco-total">à vista R$ 718,80</div>
+          </div>
+          <br>
+
+          <a href="https://wa.me/message/YQZX3HP2P3X2L1" class="btn-comecar">
+            <span class="overlay"></span>
+            <span class="label">Comece Agora</span>
+          </a>
+        </div>
+        <ul class="plano-beneficios">
+          <li> Consultoria personalizada</li>
+          <li> Materiais exclusivos</li>
+          <li> Redução de dividas</li>
+          <li> Gestão de risco</li>
+          <li> Estratégia, Curto, Médio e Longo Prazo</li>
+          <li> Interação direta c/ Professor</li>
+          <li> Turma reduzida a 10 pessoa</li>
+          <li> Suporte</li>
+
+
+        </ul>
+      </div>
+      <div class="plano-card">
+        <div class="plano-header">
+          <h5>Mercado Financeiro</h5>
+          <div class="preco-container">
+            <div class="preco-parcelado">12x de R$ 67,99</div>
+            <div class="preco-total">à vista R$ 815,88</div>
+          </div>
+          <br>
+          <a href="https://wa.me/message/YQZX3HP2P3X2L1" class="btn-comecar">
+            <span class="overlay"></span>
+            <span class="label">Comece Agora</span>
+          </a>
+        </div>
+        <ul class="plano-beneficios">
+          <li> Renda Fixa (Titulos Publicos)</li>
+          <li> Renda Fixa (Titulos Privado)</li>
+          <li> Fundos Imobiliários</li>
+          <li> Mercado de Ações</li>
+          <li> Mercado em Tempo Real</li>
+          <li> Diversificação</li>
+          <li> Suporte</li>
+        </ul>
+      </div>
+      <div class="plano-card">
+        <div class="plano-header">
+          <h5 style="font-size: 20px;">Terapia Financeira + Mercado Financeiro</h5>
+          <div class="preco-container">
+            <div class="preco-parcelado">12x de R$ 89,90</div>
+            <div class="preco-total">à vista R$ 1.078,80</div>
+          </div>
+          <br>
+          <a href="https://wa.me/message/YQZX3HP2P3X2L1" class="btn-comecar">
+            <span class="overlay"></span>
+            <span class="label">Comece Agora</span>
+          </a>
+        </div>
+        <ul class="plano-beneficios">
+          <li> Inclui todos os benefícios dos Planos 1 e 2</li>
+          <li> Pague 30% menos e leve mais</li>
+          <li> Experiência completa</li>
+          <li> Direcionamento financeiros saudáveis</li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+  <div id="contact" class="contact-us section">
+    <div class="container " style="display: flex; justify-content: center; ">
+      <div class="row" style="display: flex; justify-content: center; ">
+        <div class="col-lg-7" style="display: flex; justify-content: center; ">
+          <div class="section-heading">
+            <div style="text-align: center; margin-left: 80px; ">
+              <h2>Entre em <em>contato</em> conosco para saber mais sobre <em>nossos cursos</em></h2>
+            </div>
+
+            <div id="map" style="display: flex; justify-content: center; ">
+              <iframe src="https://maps.google.com/maps?q=Brasília,+DF,+Brazil&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                width="85%" height="350px" frameborder="0" style="border:0" allowfullscreen=""></iframe>
+            </div>
+            <div class="info" style=" margin-left: 50px;">
+              <span>
+                <a href="https://wa.me/message/YQZX3HP2P3X2L1" style="color: #28a745; display: block;">
+                  <i class="fa fa-whatsapp" style="color: #25d366; margin-right: 6px;"></i>Nossa Equipe
+                </a>
+              </span>
+              <span><i class="fa fa-envelope"></i> <a href="#">CONTATO@NOLIMITAR.COM.BR</a></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-dec">
+      <img src="assets/images/contact-dec.png" alt="">
+    </div>
+    <div class="contact-left-dec">
+      <img src="assets/images/contact-left-dec.png" alt="">
+    </div>
+  </div>
+  <div class="footer-dec">
+    <img src="assets/images/footer-dec.png" alt="">
+  </div>
+
+
+  <footer style="margin-top: -250px;">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3">
+          <div class="about footer-item">
+            <a> equipe@nolimitar.com</a>
+          </div>
+        </div>
+        <div class="col-lg-3">
+          <div class="services footer-item">
+            <ul>
+              <li><a href="assets\arquivos\Politica de Privacidade.pdf"  download style="color: white;">Política de privacidade</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="community footer-item">
+            <ul>
+              <li><a>Política de reembolso</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="subscribe-newsletters footer-item">
+            <ul>
+              <li><a href="assets\arquivos\Termos de uso NoLimitar.pdf"  download style="color: white;">Termos de uso</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-12" style="text-align: center; margin-bottom: -500px; margin-top: -800;">
+          <div class="copyright">
+            <p>Copyright © 2025. Todos os direitos reservados. <br>
+              <br>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- Scripts -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/owl-carousel.js"></script>
+  <script src="assets/js/animation.js"></script>
+  <script src="assets/js/imagesloaded.js"></script>
+  <script src="assets/js/custom.js"></script>
+
+  <script>
+    // Acc
+    $(document).on("click", ".naccs .menu div", function () {
+      var numberIndex = $(this).index();
+
+      if (!$(this).is("active")) {
+        $(".naccs .menu div").removeClass("active");
+        $(".naccs ul li").removeClass("active");
+
+        $(this).addClass("active");
+        $(".naccs ul").find("li:eq(" + numberIndex + ")").addClass("active");
+
+        var listItemHeight = $(".naccs ul")
+          .find("li:eq(" + numberIndex + ")")
+          .innerHeight();
+        $(".naccs ul").height(listItemHeight + "px");
+      }
+    });
+
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          entry.target.classList.remove('hidden');
+          observer.unobserve(entry.target); // Remove após animar uma vez
+        }
+      });
+    });
+
+    document.querySelectorAll('.slide-in-left').forEach(elem => {
+      observer.observe(elem);
+    });
+  </script>
+</body>
+
+</html>
